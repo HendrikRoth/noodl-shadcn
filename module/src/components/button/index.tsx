@@ -4,6 +4,7 @@ import { Button } from "./button";
 export interface ButtonProps {
   label: string;
   variant: "default" | "destructive" | "secondary" | "ghost" | "link";
+  onClick: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
 export const ButtonNode = Noodl.defineReactNode({
@@ -13,7 +14,9 @@ export const ButtonNode = Noodl.defineReactNode({
   initialize() {},
   getReactComponent() {
     return (props: ButtonProps) => (
-      <Button variant={props.variant}>{props.label}</Button>
+      <Button variant={props.variant} onClick={props.onClick}>
+        {props.label}
+      </Button>
     );
   },
   inputs: {},
@@ -39,7 +42,13 @@ export const ButtonNode = Noodl.defineReactNode({
       },
     },
   },
-  outputProps: {},
+  outputProps: {
+    onClick: {
+      type: "signal",
+      group: "Events",
+      displayName: "Click",
+    },
+  },
 });
 
 Noodl.defineModule({
