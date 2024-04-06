@@ -2,6 +2,7 @@ import Noodl from "@noodl/noodl-sdk";
 import { Switch } from "./switch";
 
 export interface SwitchProps {
+  id: string;
   checked: boolean;
   disabled?: boolean;
 }
@@ -16,6 +17,10 @@ export const SwitchNode = Noodl.defineReactNode({
   },
   inputs: {},
   inputProps: {
+    id: {
+      type: "string",
+      required: true,
+    },
     checked: {
       type: "boolean",
       default: false,

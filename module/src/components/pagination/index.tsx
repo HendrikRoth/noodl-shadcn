@@ -16,7 +16,9 @@ export interface PaginationElementProps {
 }
 
 export interface PaginationLinkProps {
+  text: string;
   href: string;
+  isActive?: boolean;
   children: ReactNode[];
 }
 
@@ -87,13 +89,22 @@ export const PaginationLinkNode = Noodl.defineReactNode({
   initialize() {},
   getReactComponent() {
     return (props: PaginationLinkProps) => (
-      <PaginationLink href={props.href}>{props.children}</PaginationLink>
+      <PaginationLink href={props.href} isActive={props.isActive}>
+        {props.text}
+        {props.children}
+      </PaginationLink>
     );
   },
   inputs: {},
   inputProps: {
+    text: {
+      type: "string",
+    },
     href: {
       type: "string",
+    },
+    isActive: {
+      type: "boolean",
     },
   },
   outputProps: {},
@@ -145,6 +156,7 @@ Noodl.defineModule({
     PaginationContentNode,
     PaginationItemNode,
     PaginationLinkNode,
+    PaginationEllipsisNode,
     PaginationNextNode,
     PaginationPreviousNode,
   ],

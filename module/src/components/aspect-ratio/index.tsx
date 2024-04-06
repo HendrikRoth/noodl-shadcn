@@ -5,6 +5,8 @@ import { AspectRatio } from "./aspect-ratio";
 
 export interface AspectRatioProps {
   ratio: number;
+  ratioWidth: number;
+  ratioHeight: number;
   children: ReactNode[];
 }
 
@@ -14,15 +16,24 @@ export const AspectRatioNode = Noodl.defineReactNode({
   category: "shadcn",
   initialize() {},
   getReactComponent() {
-    return (props: AspectRatioProps) => (
-      <AspectRatio ratio={props.ratio}>{props.children}</AspectRatio>
-    );
+    return (props: AspectRatioProps) => {
+      props.ratio = props.ratioWidth / props.ratioHeight;
+      return <AspectRatio ratio={props.ratio}>{props.children}</AspectRatio>;
+    };
   },
   inputs: {},
   inputProps: {
-    ratio: {
+    ratioWidth: {
       type: "number",
-      default: "16 / 9",
+      default: 16,
+      group: "Ratio",
+      displayName: "Width",
+    },
+    ratioHeight: {
+      type: "number",
+      default: 9,
+      group: "Ratio",
+      displayName: "Height",
     },
   },
   outputProps: {},

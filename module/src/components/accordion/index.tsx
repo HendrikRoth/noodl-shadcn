@@ -3,10 +3,12 @@ import type { ReactNode } from "react";
 import Noodl from "@noodl/noodl-sdk";
 import * as Accordion from "./accordion";
 import { v4 as uuid } from "uuid";
+import { cn } from "@/lib/utils";
 
 export interface AccordionProps {
   type: "single" | "multiple";
   children: (typeof AccordionItemNode)[];
+  className: string;
 }
 
 export const AccordionNode = Noodl.defineReactNode({
@@ -16,6 +18,8 @@ export const AccordionNode = Noodl.defineReactNode({
   initialize() {},
   getReactComponent() {
     return (props: AccordionProps) => {
+      props.className = cn("w-full", props.className);
+
       return (
         <Accordion.Accordion {...props}>{props.children}</Accordion.Accordion>
       );

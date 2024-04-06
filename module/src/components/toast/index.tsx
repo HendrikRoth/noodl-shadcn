@@ -47,20 +47,42 @@ export const ToastFunctionNode = Noodl.defineNode({
       type: "number",
       default: 5000,
     },
+    action: {
+      type: "string",
+    },
+  },
+  outputs: {
+    onClick: {
+      type: "signal",
+      group: "Events",
+      displayName: "Click",
+    },
   },
   signals: {
     Action() {
       const duration = this.inputs.duration || 5000;
-      toast({
+
+      let options: Record<string, any> = {
         title: this.inputs.title,
         description: this.inputs.description,
         variant: this.inputs.variant,
         duration,
-      });
+      };
+
+      if (this.inputs.action) {
+        options.action = (
+          <ToastAction
+            altText={this.inputs.action}
+            onClick={() => this.sendSignalOnOutput("onClick")}
+          >
+            {this.inputs.action}
+          </ToastAction>
+        );
+      }
+
+      toast(options);
     },
   },
-  inputProps: {},
-  outputProps: {},
 });
 
 Noodl.defineModule({

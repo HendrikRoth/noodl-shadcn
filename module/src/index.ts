@@ -1,6 +1,5 @@
 import "./styles/globals.css";
 
-// import "./components/context-menu";
 import "./components/accordion";
 import "./components/alert";
 import "./components/alert-dialog";
@@ -14,7 +13,8 @@ import "./components/card";
 import "./components/carousel";
 import "./components/checkbox";
 import "./components/collapsible";
-import "./components/command";
+// import "./components/command";
+// import "./components/context-menu";
 import "./components/dialog";
 import "./components/drawer";
 import "./components/dropdown-menu";
